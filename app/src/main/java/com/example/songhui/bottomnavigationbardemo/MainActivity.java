@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     @Override
     public void onTabSelected(int position) {
-        Toast.makeText(MainActivity.this, "position " + position + "is selected", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MainActivity.this, "position " + position + "is selected", Toast.LENGTH_SHORT).show();
         mViewPager.setCurrentItem(position);
     }
 
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     @Override
     public void onTabReselected(int position) {
-        Toast.makeText(MainActivity.this, "position " + position + "is reselected", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MainActivity.this, "position " + position + "is reselected", Toast.LENGTH_SHORT).show();
     }
 
     //SessionPageAdapter类
