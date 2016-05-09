@@ -6,11 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -52,10 +47,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     void refresh() {
         bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.drawable.ic_home_white_24dp, "Home").setActiveColorResource(R.color.orange).setBadgeItem(numberBadgeItem))
-                .addItem(new BottomNavigationItem(R.drawable.ic_book_white_24dp, "Books").setActiveColorResource(R.color.teal))
-                .addItem(new BottomNavigationItem(R.drawable.ic_music_note_white_24dp, "Music").setActiveColorResource(R.color.blue))
-                .addItem(new BottomNavigationItem(R.drawable.ic_tv_white_24dp, "Movies & TV").setActiveColorResource(R.color.brown))
+                .addItem(new BottomNavigationItem(R.drawable.ic_home_white_24dp, "首页").setActiveColorResource(R.color.orange).setBadgeItem(numberBadgeItem))
+                .addItem(new BottomNavigationItem(R.drawable.ic_categray_white_24dp,  "分类").setActiveColorResource(R.color.teal))
+                .addItem(new BottomNavigationItem(R.drawable.ic_shopingbag_white_24dp, "购物车").setActiveColorResource(R.color.blue))
+                .addItem(new BottomNavigationItem(R.drawable.ic_account_white_24dp, "我的").setActiveColorResource(R.color.brown))
                 .setFirstSelectedPosition(0)
                 .initialise();
     }
