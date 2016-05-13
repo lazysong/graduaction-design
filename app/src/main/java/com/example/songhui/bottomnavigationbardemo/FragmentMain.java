@@ -1,10 +1,23 @@
 package com.example.songhui.bottomnavigationbardemo;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SearchViewCompat;
+import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +28,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class FragmentMain extends Fragment {
+    ViewPager viewPagerMain;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,34 +39,48 @@ public class FragmentMain extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-           /* // Demonstration of a collection-browsing activity.
-            rootView.findViewById(R.id.demo_collection_button)
-                    .setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent = new Intent(getActivity(), CollectionDemoActivity.class);
-                            startActivity(intent);
-                        }
-                    });
-
-            // Demonstration of navigating to external activities.
-            rootView.findViewById(R.id.demo_external_activity)
-                    .setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            // Create an intent that asks the user to pick a photo, but using
-                            // FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET, ensures that relaunching
-                            // the application from the device home screen does not return
-                            // to the external activity.
-                            Intent externalActivityIntent = new Intent(Intent.ACTION_PICK);
-                            externalActivityIntent.setType("image*//*");
-                            externalActivityIntent.addFlags(
-                                    Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-                            startActivity(externalActivityIntent);
-                        }
-                    });*/
-
         return rootView;
     }
+    public static class BannerFragment extends Fragment {
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_banner, container, false);
+            Log.v("onCreateView()", "rootView初始化完成");
+            return rootView;
+        }
+    }
+
+    public void setting(View rootView) {
+        viewPagerMain = (ViewPager)rootView.findViewById(R.id.viewpager_main);
+        FragmentManager fm = getFragmentManager();
+        viewPagerMain.setAdapter(new FragmentStatePagerAdapter(fm) {
+            @Override
+            public Fragment getItem(int position) {
+                BannerFragment bannerFragment = new BannerFragment();
+                View view = bannerFragment.getView();
+                ImageView imageBanner;
+                if(view != null)
+                     imageBanner = (ImageView)view.findViewById(R.id.image_banner);
+                else {
+                    Log.v("getView()", "view为null");
+                    return bannerFragment;
+                }
+                switch (position) {
+                    case 0:
+                        imageBanner.setImageResource(R.drawable.pic_banner1);
+                        break;
+                    default:
+                        imageBanner.setImageResource(R.drawable.pic_banner1);
+                }
+                return bannerFragment;
+            }
+
+            @Override
+            public int getCount() {
+                return 5;
+            }
+        });
+    }
+
 }

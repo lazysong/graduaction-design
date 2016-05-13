@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -16,6 +19,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     BadgeItem numberBadgeItem;
     ViewPager mViewPager;
     AppSectionsPagerAdapter mAppSectionsPagerAdapter;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
             return "Section " + (position + 1);
         }
     }
-
-
+    public void sayHello(View view) {
+        Toast.makeText(MainActivity.this, "hello ", Toast.LENGTH_SHORT).show();
+    }
 }

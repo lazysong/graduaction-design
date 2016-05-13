@@ -9,7 +9,7 @@
     android:paddingTop="0dp"
     tools:context="com.example.songhui.bottomnavigationbardemo.MainActivity">
 
-    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.example.songhui.bottomnavigationbardemo.MyViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
