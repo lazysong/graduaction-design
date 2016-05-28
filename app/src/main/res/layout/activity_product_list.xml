@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    tools:context="com.example.songhui.bottomnavigationbardemo.ProductListActivity">
 
     <RelativeLayout
+        android:id="@+id/relative_layout_product_list"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/colorTransparent">
@@ -32,21 +33,17 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ScrollView
-            android:id="@+id/scrollview_top_category"
-            android:layout_width="100dp"
-            android:layout_height="match_parent">
-        </ScrollView>
-        <ScrollView
-            android:id="@+id/scrollview_sub_category"
+        android:layout_height="match_parent"
+        android:layout_below="@id/relative_layout_product_list">
+
+        <ListView
+            android:id="@+id/listview_product_list"
             android:layout_width="match_parent"
-            android:layout_height="512dp">
+            android:layout_height="match_parent">
 
-        </ScrollView>
-    </LinearLayout>
+        </ListView>
+    </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>
