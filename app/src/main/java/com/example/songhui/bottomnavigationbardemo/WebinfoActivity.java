@@ -6,8 +6,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 public class WebinfoActivity extends AppCompatActivity {
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,13 @@ public class WebinfoActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        webView = (WebView) findViewById(R.id.webview_webinfo);
+        webView.getSettings().setDefaultTextEncodingName("UTF-8");
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl("http://www.cnhnb.com/");
     }
 
 }

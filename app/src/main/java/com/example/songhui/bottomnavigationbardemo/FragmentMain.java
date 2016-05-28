@@ -1,5 +1,7 @@
 package com.example.songhui.bottomnavigationbardemo;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -23,9 +25,10 @@ import android.widget.Toast;
  * Use the {@link FragmentMain#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentMain extends Fragment {
+public class FragmentMain extends Fragment implements View.OnClickListener {
     ViewPager viewPagerMain;
     Button searchButton;
+    ImageView imageHot;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,33 +63,42 @@ public class FragmentMain extends Fragment {
             return;
         }
         //为ViewPager绑定一个用于测试监听器
-        viewPagerMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"viewPagerMain 被点击", Toast.LENGTH_SHORT);
-            }
-        });
+
 //        viewPagerMain.setCurrentItem(0);
+        imageHot = (ImageView) rootView.findViewById(R.id.image_hot);
+        imageHot.setOnClickListener(this);
         searchButton = (Button) rootView.findViewById(R.id.search_button);
     }
 
-    public static class BannerFragment extends Fragment {
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        Intent intent = new Intent();
+        switch (id) {
+            case R.id.image_banner:
+                intent.setClass(getContext(), WebinfoActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.image_hot:
+                intent.setClass(getContext(), WebinfoActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    class BannerFragment extends Fragment {
         public ImageView image;
         public TextView textView;
-        public static final String ARG_SECTION_NUMBER = "section_number";
+        public final String ARG_SECTION_NUMBER = "section_number";
 
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_banner, container, false);
 
-            /*image = (ImageView) rootView.findViewById(R.id.image_banner);
-            if(image != null)
-                image.setImageResource(R.drawable.pic_banner1);
-            else {
-                Log.v("viewPager", "image == null");
-                return rootView;
-            }*/
+            image = (ImageView) rootView.findViewById(R.id.image_banner);
+            image.setOnClickListener(FragmentMain.this);
+
             return rootView;
         }
     }

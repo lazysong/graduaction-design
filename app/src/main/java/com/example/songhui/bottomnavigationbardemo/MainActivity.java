@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 //        Toast.makeText(MainActivity.this, "position " + position + "is reselected", Toast.LENGTH_SHORT).show();
     }
 
+
     //SessionPageAdapter类
     public static class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -114,6 +115,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, ProductDetailsActivity.class);
         startActivity(intent);
-
     }
+
 }
