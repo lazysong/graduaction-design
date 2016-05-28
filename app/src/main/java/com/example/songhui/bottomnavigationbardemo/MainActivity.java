@@ -1,5 +1,6 @@
 package com.example.songhui.bottomnavigationbardemo;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -110,5 +111,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     }
     public void sayHello(View view) {
         Toast.makeText(MainActivity.this, "hello ", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, ProductDetailsActivity.class);
+        startActivity(intent);
+
     }
 }
