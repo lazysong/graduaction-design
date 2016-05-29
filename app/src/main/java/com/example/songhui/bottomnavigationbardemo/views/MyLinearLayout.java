@@ -31,5 +31,5 @@ public class MyLinearLayout extends LinearLayout {
     public void setProduct_subcategory_no(int product_subcategory_no) {
         this.product_subcategory_no = product_subcategory_no;
     }
-    
+
 }

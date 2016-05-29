@@ -1,4 +1,4 @@
-package com.example.songhui.bottomnavigationbardemo;
+package com.example.songhui.bottomnavigationbardemo.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import com.example.songhui.bottomnavigationbardemo.R;
 
 public class WebinfoActivity extends AppCompatActivity {
     private WebView webView;

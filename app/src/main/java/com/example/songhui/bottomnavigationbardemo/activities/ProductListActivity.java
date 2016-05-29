@@ -1,23 +1,17 @@
-package com.example.songhui.bottomnavigationbardemo;
+package com.example.songhui.bottomnavigationbardemo.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.DataSetObserver;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
-import android.support.v7.widget.ListViewCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.example.songhui.bottomnavigationbardemo.R;
 import com.example.songhui.bottomnavigationbardemo.entities.Product;
 import com.example.songhui.bottomnavigationbardemo.entities.SubCategory;
 
@@ -25,8 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.zip.Inflater;
 
 public class ProductListActivity extends AppCompatActivity implements View.OnClickListener {
     ListView listView;

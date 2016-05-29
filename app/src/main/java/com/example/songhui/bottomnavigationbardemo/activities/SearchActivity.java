@@ -1,8 +1,10 @@
-package com.example.songhui.bottomnavigationbardemo;
+package com.example.songhui.bottomnavigationbardemo.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.example.songhui.bottomnavigationbardemo.R;
 
 public class SearchActivity extends AppCompatActivity {
     private String keywords;

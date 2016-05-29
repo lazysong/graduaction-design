@@ -1,4 +1,4 @@
-package com.example.songhui.bottomnavigationbardemo;
+package com.example.songhui.bottomnavigationbardemo.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,10 +20,10 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.songhui.bottomnavigationbardemo.ProductListActivity;
+import com.example.songhui.bottomnavigationbardemo.activities.ProductListActivity;
 import com.example.songhui.bottomnavigationbardemo.R;
-import com.example.songhui.bottomnavigationbardemo.SearchActivity;
-import com.example.songhui.bottomnavigationbardemo.WebinfoActivity;
+import com.example.songhui.bottomnavigationbardemo.activities.SearchActivity;
+import com.example.songhui.bottomnavigationbardemo.activities.WebinfoActivity;
 import com.example.songhui.bottomnavigationbardemo.entities.SubCategory;
 import com.example.songhui.bottomnavigationbardemo.entities.TopCategory;
 import com.example.songhui.bottomnavigationbardemo.views.MyLinearLayout;
@@ -174,7 +174,7 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
      * Use the {@link FragmentMain#newInstance} factory method to
      * create an instance of this fragment.
      */
-    public static class FragmentMain extends Fragment implements View.OnClickListener {
+   /* public static class FragmentMain extends Fragment implements View.OnClickListener {
         ViewPager viewPagerMain;
         Button searchButton;
         ImageView imageHot;
@@ -240,9 +240,9 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
                     intent.setClass(getContext(), SearchActivity.class);
                     startActivity(intent);
             }
-        }
+        }*/
 
-        class BannerFragment extends Fragment {
+        /*class BannerFragment extends Fragment {
             public ImageView image;
             public TextView textView;
             public final String ARG_SECTION_NUMBER = "section_number";
@@ -257,13 +257,13 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
 
                 return rootView;
             }
-        }
+        }*/
 
 
         /**
          * ViewPager的适配器
          */
-        class MyViewPagerAdapter extends FragmentPagerAdapter {
+        /*class MyViewPagerAdapter extends FragmentPagerAdapter {
 
             public MyViewPagerAdapter(FragmentManager fm) {
                 super(fm);
@@ -279,8 +279,8 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
             public int getCount() {
                 return 5;
             }
-        }
-    }
+        }*/
+
 
     /**
      * A simple {@link Fragment} subclass.
@@ -288,7 +288,7 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
      * {@link FragmentOrder.OnFragmentInteractionListener} interface
      * to handle interaction events.
      */
-    public static class FragmentOrder extends Fragment {
+   /* public static class FragmentOrder extends Fragment {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -296,12 +296,12 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
             View rootView = inflater.inflate(R.layout.fragment_order, container, false);
             return rootView;
         }
-    }
+    }*/
 
     /**
      * Created by songhui on 2016/5/8.
      */
-    public static class FregmentAccount extends Fragment{
+    /*public static class FregmentAccount extends Fragment{
         public static final String ARG_SECTION_NUMBER = "section_number";
 
         @Nullable
@@ -310,5 +310,6 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
             View rootView = inflater.inflate(R.layout.fragment_order, container, false);
             return  rootView;
         }
-    }
+    }*/
+
 }

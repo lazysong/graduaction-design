@@ -1,4 +1,4 @@
-package com.example.songhui.bottomnavigationbardemo;
+package com.example.songhui.bottomnavigationbardemo.views;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

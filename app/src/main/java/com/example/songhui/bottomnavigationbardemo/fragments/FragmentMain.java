@@ -1,6 +1,5 @@
-package com.example.songhui.bottomnavigationbardemo;
+package com.example.songhui.bottomnavigationbardemo.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,7 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.songhui.bottomnavigationbardemo.R;
+import com.example.songhui.bottomnavigationbardemo.activities.SearchActivity;
+import com.example.songhui.bottomnavigationbardemo.activities.WebinfoActivity;
 
 /**
  * A simple {@link Fragment} subclass.

@@ -1,4 +1,4 @@
-package com.example.songhui.bottomnavigationbardemo;
+package com.example.songhui.bottomnavigationbardemo.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.songhui.bottomnavigationbardemo.R;
 import com.example.songhui.bottomnavigationbardemo.entities.Product;
 
 public class ProductDetailsActivity extends AppCompatActivity {

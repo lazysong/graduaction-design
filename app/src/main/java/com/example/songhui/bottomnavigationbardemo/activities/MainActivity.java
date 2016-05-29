@@ -1,6 +1,5 @@
-package com.example.songhui.bottomnavigationbardemo;
+package com.example.songhui.bottomnavigationbardemo.activities;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,11 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.example.songhui.bottomnavigationbardemo.R;
+import com.example.songhui.bottomnavigationbardemo.fragments.FragmentCategray;
+import com.example.songhui.bottomnavigationbardemo.fragments.FragmentMain;
+import com.example.songhui.bottomnavigationbardemo.fragments.FragmentOrder;
+import com.example.songhui.bottomnavigationbardemo.fragments.FregmentAccount;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
     BottomNavigationBar bottomNavigationBar;
@@ -89,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 case 0:
                     return new FragmentMain();
                 case 1:
-                    return new com.example.songhui.bottomnavigationbardemo.FragmentCategray();
+                    return new FragmentCategray();
                 case 2:
                     return new FragmentOrder();
                 case 3:
