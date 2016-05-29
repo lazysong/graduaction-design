@@ -7,8 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.songhui.bottomnavigationbardemo.entities.Product;
+
 public class ProductDetailsActivity extends AppCompatActivity {
     private Button backButton;
+    private Product product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,5 +25,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+        Intent intent = getIntent();
+        product = (Product) intent.getExtras().getSerializable("product");
+        Toast.makeText(ProductDetailsActivity.this, "product_name = " + product.getProduct_name() , Toast.LENGTH_SHORT).show();
     }
 }

@@ -5,10 +5,14 @@ package com.example.songhui.bottomnavigationbardemo.entities;
  */
 public class SubCategory {
     /*PRODUCT_SUBCATEGORY_NO	PRODUCT_SUBCATEGORY_NAME	PRODUCT_CATEGORY_NO*/
-    private int product_subcategory_no;
+    private int  product_subcategory_no;
     private String product_subcategory_name;
     private TopCategory topCategory;
     private String image;
+
+    public SubCategory(int product_subcategory_no) {
+        this.product_subcategory_no = product_subcategory_no;
+    }
 
     public SubCategory(int product_subcategory_no, String product_subcategory_name, TopCategory topCategory, String image) {
         this.product_subcategory_no = product_subcategory_no;

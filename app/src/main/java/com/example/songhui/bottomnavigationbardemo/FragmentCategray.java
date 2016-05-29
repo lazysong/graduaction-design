@@ -129,11 +129,13 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
             initRight(getView(), getLayoutInflater(null), v);
         }
         if(v.getClass().equals(MyLinearLayout.class)) {
+            int product_subcategory_no = ((MyLinearLayout)v).getProduct_subcategory_no();
             Toast.makeText(getContext(),
-                    "自定义的LinearLayout被点击了！sub_category_no = " + ((MyLinearLayout)v).getProduct_subcategory_no(),
+                    "自定义的LinearLayout被点击了！sub_category_no = " + product_subcategory_no,
                     Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.setClass(getContext(), ProductListActivity.class);
+            intent.putExtra("product_subcategory_no", product_subcategory_no);
             startActivity(intent);
         }
     }

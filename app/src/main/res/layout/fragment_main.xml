@@ -457,20 +457,20 @@
         android:background="@color/colorTransparent">
 
         <EditText
-            android:id="@+id/search_content"
-            android:layout_width="180dp"
-            android:layout_height="40dp"
+            android:id="@+id/editText_fragment_main"
+            android:layout_width="200dp"
+            android:layout_height="34dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="60dp"
             android:background="@drawable/ic_search_view" />
 
         <Button
-            android:id="@+id/search_button"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
+            android:id="@+id/searchButton_fragment_main"
+            android:layout_width="68dp"
+            android:layout_height="34dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/search_content"
+            android:layout_toRightOf="@id/editText_fragment_main"
             android:background="@color/colorPrimary"
             android:onClick="sayHello"
             android:text="搜索"

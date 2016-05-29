@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
     <ImageView
+        android:id="@+id/product_image_list_item"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:background="@drawable/ic_launcher_48dp"/>
@@ -14,17 +15,20 @@
         android:layout_marginLeft="8dp"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/product_name_list_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="商品名称"
             android:textSize="16sp" />
         <TextView
+            android:id="@+id/product_current_price_list_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="当前价格，是否降价"
             android:textSize="20sp"
             android:textColor="@color/colorPrice"/>
         <TextView
+            android:id="@+id/prduct_raito_sale_list_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="好评率，销量"/>

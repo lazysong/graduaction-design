@@ -111,10 +111,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         }
     }
     public void sayHello(View view) {
-        Toast.makeText(MainActivity.this, "hello ", Toast.LENGTH_SHORT).show();
+        /*Toast.makeText(MainActivity.this, "hello ", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, ProductDetailsActivity.class);
-        startActivity(intent);
+        startActivity(intent);*/
     }
 
 }
