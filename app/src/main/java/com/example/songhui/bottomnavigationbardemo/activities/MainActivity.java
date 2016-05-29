@@ -15,7 +15,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.example.songhui.bottomnavigationbardemo.R;
 import com.example.songhui.bottomnavigationbardemo.fragments.FragmentCategray;
 import com.example.songhui.bottomnavigationbardemo.fragments.FragmentMain;
-import com.example.songhui.bottomnavigationbardemo.fragments.FragmentOrder;
+import com.example.songhui.bottomnavigationbardemo.fragments.FragmentCar;
 import com.example.songhui.bottomnavigationbardemo.fragments.FregmentAccount;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 case 1:
                     return new FragmentCategray();
                 case 2:
-                    return new FragmentOrder();
+                    return new FragmentCar();
                 case 3:
                     return new FregmentAccount();
 
