@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.ListViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -25,10 +28,13 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.zip.Inflater;
 
-public class ProductListActivity extends AppCompatActivity {
+public class ProductListActivity extends AppCompatActivity implements View.OnClickListener {
     ListView listView;
     int product_subcategory_no;
     List<Product> productList;
+
+    private EditText search_product_list;
+    private Button button_search_product_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +69,10 @@ public class ProductListActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        search_product_list = (EditText) findViewById(R.id.search_product_list);
+        button_search_product_list = (Button) findViewById(R.id.button_search_product_list);
+        button_search_product_list.setOnClickListener(this);
     }
 
     /**
@@ -99,4 +109,15 @@ public class ProductListActivity extends AppCompatActivity {
         return list;
     }
 
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent();
+        int id = v.getId();
+        switch (id) {
+            case R.id.button_search_product_list:
+                intent.putExtra("keywords", search_product_list.getText().toString());
+                intent.setClass(ProductListActivity.this, SearchActivity.class);
+                startActivity(intent);
+        }
+    }
 }

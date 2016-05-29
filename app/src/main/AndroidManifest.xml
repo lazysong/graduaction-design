@@ -26,8 +26,10 @@
             android:name=".WebinfoActivity"
             android:label="@string/title_activity_webinfo"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ProductListActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+        <activity
+            android:name=".ProductListActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

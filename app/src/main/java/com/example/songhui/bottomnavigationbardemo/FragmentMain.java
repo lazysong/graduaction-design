@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,8 +28,10 @@ import android.widget.Toast;
  */
 public class FragmentMain extends Fragment implements View.OnClickListener {
     ViewPager viewPagerMain;
-    Button searchButton;
+    Button searchButton_fragment_main;
     ImageView imageHot;
+
+    private EditText editText_fragment_main;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,7 +70,9 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
 //        viewPagerMain.setCurrentItem(0);
         imageHot = (ImageView) rootView.findViewById(R.id.image_hot);
         imageHot.setOnClickListener(this);
-        searchButton = (Button) rootView.findViewById(R.id.search_button);
+        editText_fragment_main = (EditText) rootView.findViewById(R.id.editText_fragment_main);
+        searchButton_fragment_main = (Button) rootView.findViewById(R.id.searchButton_fragment_main);
+        searchButton_fragment_main.setOnClickListener(this);
     }
 
     @Override
@@ -81,6 +86,11 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
                 break;
             case R.id.image_hot:
                 intent.setClass(getContext(), WebinfoActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.searchButton_fragment_main:
+                intent.putExtra("keywords", editText_fragment_main.getText().toString());
+                intent.setClass(getContext(), SearchActivity.class);
                 startActivity(intent);
                 break;
         }

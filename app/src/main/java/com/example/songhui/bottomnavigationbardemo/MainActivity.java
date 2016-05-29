@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
                 case 0:
                     return new FragmentMain();
                 case 1:
-                    return new FragmentCategray();
+                    return new com.example.songhui.bottomnavigationbardemo.FragmentCategray();
                 case 2:
                     return new FragmentOrder();
                 case 3:

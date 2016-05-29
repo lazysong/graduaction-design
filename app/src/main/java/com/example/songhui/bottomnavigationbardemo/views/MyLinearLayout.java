@@ -1,7 +1,9 @@
 package com.example.songhui.bottomnavigationbardemo.views;
 
 import android.content.Context;
+import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
 /**
@@ -29,4 +31,5 @@ public class MyLinearLayout extends LinearLayout {
     public void setProduct_subcategory_no(int product_subcategory_no) {
         this.product_subcategory_no = product_subcategory_no;
     }
+    
 }

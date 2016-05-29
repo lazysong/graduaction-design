@@ -2,17 +2,28 @@ package com.example.songhui.bottomnavigationbardemo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
-import android.util.AttributeSet;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.songhui.bottomnavigationbardemo.ProductListActivity;
+import com.example.songhui.bottomnavigationbardemo.R;
+import com.example.songhui.bottomnavigationbardemo.SearchActivity;
+import com.example.songhui.bottomnavigationbardemo.WebinfoActivity;
 import com.example.songhui.bottomnavigationbardemo.entities.SubCategory;
 import com.example.songhui.bottomnavigationbardemo.entities.TopCategory;
 import com.example.songhui.bottomnavigationbardemo.views.MyLinearLayout;
@@ -32,6 +43,9 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
     ScrollView scrollViewRight;
     LinearLayout topCategoryLayout;
     GridLayout subCategoryLayout;
+
+    private EditText editText_fragment_categray;
+    private Button searchButton_fragment_categray;
 
     List<SubCategory> subCategories;
     List<TopCategory> topCategories;
@@ -69,6 +83,10 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
             topCategoryLayout.addView(viewList.get(i));
         }
         scrollViewLeft.addView(topCategoryLayout);
+
+        editText_fragment_categray = (EditText) rootView.findViewById(R.id.editText_fragment_categray);
+        searchButton_fragment_categray = (Button) rootView.findViewById(R.id.searchButton_fragment_categray);
+        searchButton_fragment_categray.setOnClickListener(this);
     }
 
     private void initRight(View rootView, LayoutInflater inflater, View v) {
@@ -93,7 +111,6 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
             subCategoryLayout.addView(myLinearLayout);
         }
         scrollViewRight.addView(subCategoryLayout);
-
     }
     List<TopCategory> getTopCategories() {
         List<TopCategory> topCategories = new ArrayList<TopCategory>();
@@ -137,6 +154,161 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
             intent.setClass(getContext(), ProductListActivity.class);
             intent.putExtra("product_subcategory_no", product_subcategory_no);
             startActivity(intent);
+        }
+        int id = v.getId();
+        Intent intent = new Intent();
+        switch (id) {
+            case R.id.searchButton_fragment_categray:
+                intent.putExtra("keywords", editText_fragment_categray.getText().toString());
+                intent.setClass(getContext(), SearchActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    /**
+     * A simple {@link Fragment} subclass.
+     * Activities that contain this fragment must implement the
+     * {@link FragmentMain.OnFragmentInteractionListener} interface
+     * to handle interaction events.
+     * Use the {@link FragmentMain#newInstance} factory method to
+     * create an instance of this fragment.
+     */
+    public static class FragmentMain extends Fragment implements View.OnClickListener {
+        ViewPager viewPagerMain;
+        Button searchButton;
+        ImageView imageHot;
+        EditText editText_fragment_main;
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            return rootView;
+        }
+
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+            innilize(getView());
+        }
+
+        private void innilize(View rootView) {
+            if (rootView != null)
+                viewPagerMain = (ViewPager)rootView.findViewById(R.id.viewpager_main);
+            else {
+                Log.v("viewPager", "viewPagerMain == null");
+                return;
+            }
+            FragmentManager fm = getChildFragmentManager();
+            if(viewPagerMain != null)
+                viewPagerMain.setAdapter(new MyViewPagerAdapter(fm));
+            else {
+                Log.v("viewPager", "viewPagerMain == null");
+                return;
+            }
+            //为ViewPager绑定一个用于测试监听器
+
+            //        viewPagerMain.setCurrentItem(0);
+            imageHot = (ImageView) rootView.findViewById(R.id.image_hot);
+            imageHot.setOnClickListener(this);
+            editText_fragment_main = (EditText) rootView.findViewById(R.id.editText_fragment_main);
+            searchButton = (Button) rootView.findViewById(R.id.searchButton_fragment_main);
+            searchButton.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int id = v.getId();
+            Intent intent = new Intent();
+            switch (id) {
+                case R.id.image_banner:
+                    intent.setClass(getContext(), WebinfoActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.image_hot:
+                    intent.setClass(getContext(), WebinfoActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.searchButton_fragment_main:
+                    intent.putExtra("keywords", editText_fragment_main.getText().toString());
+                    intent.setClass(getContext(), SearchActivity.class);
+                    startActivity(intent);
+            }
+        }
+
+        class BannerFragment extends Fragment {
+            public ImageView image;
+            public TextView textView;
+            public final String ARG_SECTION_NUMBER = "section_number";
+
+            @Nullable
+            @Override
+            public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+                View rootView = inflater.inflate(R.layout.fragment_banner, container, false);
+
+                image = (ImageView) rootView.findViewById(R.id.image_banner);
+                image.setOnClickListener(FragmentMain.this);
+
+                return rootView;
+            }
+        }
+
+
+        /**
+         * ViewPager的适配器
+         */
+        class MyViewPagerAdapter extends FragmentPagerAdapter {
+
+            public MyViewPagerAdapter(FragmentManager fm) {
+                super(fm);
+            }
+
+            @Override
+            public Fragment getItem(int position) {
+                Log.v("viewPager", "getItem()方法被调用");
+                return new BannerFragment();
+            }
+
+            @Override
+            public int getCount() {
+                return 5;
+            }
+        }
+    }
+
+    /**
+     * A simple {@link Fragment} subclass.
+     * Activities that contain this fragment must implement the
+     * {@link FragmentOrder.OnFragmentInteractionListener} interface
+     * to handle interaction events.
+     */
+    public static class FragmentOrder extends Fragment {
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_order, container, false);
+            return rootView;
+        }
+    }
+
+    /**
+     * Created by songhui on 2016/5/8.
+     */
+    public static class FregmentAccount extends Fragment{
+        public static final String ARG_SECTION_NUMBER = "section_number";
+
+        @Nullable
+        @Override
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_order, container, false);
+            return  rootView;
         }
     }
 }
