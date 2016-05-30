@@ -1,13 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorTransparent">
+
+        <TextView
+            android:id="@+id/title_fragment_car"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="我的账户"
+            android:textSize="22sp"/>
+
+        <Button
+            android:id="@+id/edit_fragment_car"
+            android:layout_width="56dp"
+            android:layout_height="28dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="@color/colorTransparent"
+            android:onClick="sayHello"
+            android:text="消息"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/background_fragment_account"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/account_background">
+
+        <ImageView
+            android:id="@+id/user_image_fragment_account"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/user_image"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="28dp"/>
+
+        <TextView
+            android:id="@+id/user_name_fragment_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/user_image_fragment_account"
+            android:textSize="20sp"
+            android:text="立二拆三"
+            android:textColor="@color/colorTextInDarkBackground"
+            android:layout_alignTop="@id/user_image_fragment_account"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="28dp"/>
+
+        <TextView
+            android:id="@+id/user_level_fragment_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_name_fragment_account"
+            android:textSize="14sp"
+            android:text="金牌会员"
+            android:textColor="@color/colorTextInDarkBackground"
+            android:layout_marginTop="8sp"
+            android:layout_alignLeft="@id/user_name_fragment_account"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_image_fragment_account"
+            android:textSize="12sp"
+            android:text="点击管理账户信息"
+            android:textColor="@color/colorTextInDarkBackground"
+            android:layout_marginRight="8sp"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="my account"
-        android:textSize="30sp"
-        android:layout_gravity="center_vertical"/>
+        android:layout_marginTop="8dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/user_order_fragment_account"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:text="我的订单"
+            android:background="@drawable/setbar_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:textSize="20sp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:background="@drawable/setbar_bg">
+
+                <LinearLayout
+                    android:id="@+id/notPayed_fragment_account"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:orientation="vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="待付款"
+                        android:gravity="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_launcher_48dp"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/notReceived_fragment_account"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="待收货"
+                        android:gravity="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_launcher_48dp"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/notCommented_fragment_account"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:orientation="vertical"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="6dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="待评价"
+                        android:gravity="center"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_launcher_48dp"
+                        android:layout_gravity="center_horizontal"/>
+                </LinearLayout>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/help_fragment_account"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginTop="8dp"
+            android:text="帮助与反馈"
+            android:background="@drawable/setbar_bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="8dp"
+            android:textSize="20sp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

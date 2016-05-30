@@ -6,7 +6,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="48dp"
         android:background="@color/colorTransparent">
 
         <TextView
@@ -15,12 +15,13 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="购物车"/>
+            android:text="购物车"
+            android:textSize="22sp"/>
 
         <Button
             android:id="@+id/edit_fragment_car"
-            android:layout_width="48dp"
-            android:layout_height="24dp"
+            android:layout_width="56dp"
+            android:layout_height="28dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
@@ -33,12 +34,12 @@
     <ScrollView
         android:id="@+id/scrollview_fragment_car"
         android:layout_width="match_parent"
-        android:layout_height="400dp">
+        android:layout_height="480dp">
 
     </ScrollView>
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:background="@color/colorPrimary"
         android:textSize="30sp"
         android:text="去结算"

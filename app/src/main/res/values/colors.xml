@@ -12,4 +12,5 @@
     <color name="orange">#F57C00</color>
 
     <color name="colorPrice">#f94141</color>
+    <color name="colorTextInDarkBackground">#f9f9f9</color>
 </resources>
