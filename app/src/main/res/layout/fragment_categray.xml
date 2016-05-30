@@ -26,7 +26,6 @@
             android:layout_marginLeft="20dp"
             android:layout_toRightOf="@id/editText_fragment_categray"
             android:background="@color/colorPrimary"
-            android:onClick="sayHello"
             android:text="搜索"
             android:textColor="@android:color/white" />
 

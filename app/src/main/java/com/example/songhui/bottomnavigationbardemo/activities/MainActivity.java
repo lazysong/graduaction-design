@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                // When swiping between different app sections, select the corresponding tab.
-                // We can also use ActionBar.Tab#select() to do this if we have a reference to the
-                // Tab.
                 bottomNavigationBar.selectTab(position);
             }
         });
@@ -75,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
 
     @Override
     public void onTabReselected(int position) {
-//        Toast.makeText(MainActivity.this, "position " + position + "is reselected", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -112,12 +108,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         public CharSequence getPageTitle(int position) {
             return "Section " + (position + 1);
         }
-    }
-    public void sayHello(View view) {
-        /*Toast.makeText(MainActivity.this, "hello ", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent();
-        intent.setClass(MainActivity.this, ProductDetailsActivity.class);
-        startActivity(intent);*/
     }
 
 }
