@@ -20,6 +20,7 @@ public class Product implements Serializable {
     private float last_price;
     private float current_price;
     private float comment_ratio;
+    private int sale_account;
     private String create_date;
 
     public Product(long product_no) {
@@ -112,5 +113,13 @@ public class Product implements Serializable {
 
     public void setCreate_date(String create_date) {
         this.create_date = create_date;
+    }
+
+    public int getSale_account() {
+        return sale_account;
+    }
+
+    public void setSale_account(int sale_account) {
+        this.sale_account = sale_account;
     }
 }

@@ -17,8 +17,8 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:shrinkColumns="0,1,2"
-            android:layout_marginTop="8dp">
+            android:layout_marginTop="8dp"
+            android:shrinkColumns="0,1,2">
 
             <TableRow>
 
@@ -26,12 +26,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="0"
-                    android:orientation="vertical"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginRight="18dp">
+                    android:layout_marginRight="18dp"
+                    android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/image_hot"
+                        android:id="@+id/imageView_freshShop"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:background="@drawable/ic_fresh_market" />
@@ -46,9 +46,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
-                    android:orientation="vertical"
                     android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp">
+                    android:layout_marginRight="18dp"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="45dp"
@@ -65,9 +65,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="2"
-                    android:orientation="vertical"
                     android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp">
+                    android:layout_marginRight="18dp"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="45dp"
@@ -84,9 +84,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="3"
-                    android:orientation="vertical"
                     android:layout_marginLeft="18dp"
-                    android:layout_marginRight="18dp">
+                    android:layout_marginRight="18dp"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:layout_width="45dp"
@@ -106,7 +106,8 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="55dp">
+            android:layout_marginBottom="58dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -116,49 +117,52 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
-                    android:text="推荐"
-                    android:textSize="18sp"
                     android:background="@drawable/setbar_bg"
-                    android:paddingLeft="8dp"/>
+                    android:paddingLeft="8dp"
+                    android:text="推荐"
+                    android:textSize="18sp" />
+
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:shrinkColumns="0,1,2"
                     android:background="@drawable/setbar_bg">
 
-                    <TableRow>
+                    <TableRow
+                        android:layout_width="match_parent"
+                        android:paddingLeft="16dp">
 
                         <LinearLayout
                             android:id="@+id/product1_recommand_fragment_main"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_column="0"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp">
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/product1_recommand_image_fragment_main"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"/>
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginTop="8dp" />
 
                             <TextView
                                 android:id="@+id/product1_priceCurrent_fragment_main"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="4dp"
-                                android:text="￥6.5/斤"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:text="￥6.5/斤" />
+
                             <TextView
                                 android:id="@+id/product1_priceLast_fragment_main"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
+                                android:gravity="center"
                                 android:text="￥6.5/斤"
-                                android:textSize="12sp"
-                                android:gravity="center"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -166,32 +170,33 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_column="1"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp">
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/product2_recommand_image_fragment_main"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"/>
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginTop="8dp" />
 
                             <TextView
                                 android:id="@+id/product2_priceCurrent_fragment_main"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="4dp"
-                                android:text="￥6.5/斤"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:text="￥6.5/斤" />
+
                             <TextView
                                 android:id="@+id/product2_priceLast_fragment_main"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
+                                android:gravity="center"
                                 android:text="￥6.5/斤"
-                                android:textSize="12sp"
-                                android:gravity="center"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -199,285 +204,57 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_column="2"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="20dp">
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical">
 
                             <ImageView
                                 android:id="@+id/product3_recommand_image_fragment_main"
                                 android:layout_width="90dp"
                                 android:layout_height="90dp"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginBottom="8dp"/>
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginTop="8dp" />
 
                             <TextView
                                 android:id="@+id/product3_priceCurrent_fragment_main"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="4dp"
-                                android:text="￥6.5/斤"
-                                android:gravity="center"/>
+                                android:gravity="center"
+                                android:text="￥6.5/斤" />
+
                             <TextView
                                 android:id="@+id/product3_priceLast_fragment_main"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
+                                android:gravity="center"
                                 android:text="￥6.5/斤"
-                                android:textSize="12sp"
-                                android:gravity="center"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
 
                     </TableRow>
 
 
                 </TableLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="22dp"
-                    android:text="推荐"
-                    android:textSize="18sp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/setbar_bg"
-                    android:paddingLeft="8dp"/>
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/setbar_bg">
-                <TableRow>
+                    android:paddingLeft="8dp"
+                    android:text="热销"
+                    android:textSize="18sp" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="0"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
+                <GridLayout
+                    android:id="@+id/gridLayout_fragment_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3"
+                    android:background="@drawable/setbar_bg">
+                </GridLayout>
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="2"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="3"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-                </TableRow>
-                <TableRow>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="0"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="2"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="3"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-                </TableRow>
-                <TableRow>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="0"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="2"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="3"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/ic_launcher_48dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="热门活动" />
-                    </LinearLayout>
-                </TableRow>
-            </TableLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

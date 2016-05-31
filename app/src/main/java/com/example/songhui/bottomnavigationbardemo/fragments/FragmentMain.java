@@ -18,14 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.songhui.bottomnavigationbardemo.R;
+import com.example.songhui.bottomnavigationbardemo.activities.ProductDetailsActivity;
 import com.example.songhui.bottomnavigationbardemo.activities.SearchActivity;
 import com.example.songhui.bottomnavigationbardemo.activities.WebinfoActivity;
 import com.example.songhui.bottomnavigationbardemo.entities.Product;
+import com.example.songhui.bottomnavigationbardemo.views.ProductInfoLinearLayout;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -42,33 +45,37 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class FragmentMain extends Fragment implements View.OnClickListener {
-    ViewPager viewPagerMain;
-    Button searchButton_fragment_main;
-    ImageView imageHot;
-
+    private ViewPager viewPagerMain;
+    private Button searchButton_fragment_main;
+    private ImageView imageHot;
     private EditText editText_fragment_main;
 
-    private LinearLayout product1_recommand;
-    private LinearLayout product2_recommand;
-    private LinearLayout product3_recommand;
-
+    //展示的推荐商品的个数
     private static final int PRODUCT_RECOMMAND_COUNT = 3;
-
+    //推荐商品的实体列表
+    List<Product> productRecommandList;
+    //显示商品信息的布局
+    private LinearLayout[] productLayoutList_recommand = new LinearLayout[PRODUCT_RECOMMAND_COUNT];
+    private int[] productLayoutList_recommand_id = new int[] {
+            R.id.product1_recommand_fragment_main,
+            R.id.product2_recommand_fragment_main,
+            R.id.product3_recommand_fragment_main,
+    };
+    //显示商品的图像
     private ImageView[] recommand_product_imageList_imageView = new ImageView[PRODUCT_RECOMMAND_COUNT];
     private int[] recommand_product_imageList_id = new int[] {
             R.id.product1_recommand_image_fragment_main,
             R.id.product2_recommand_image_fragment_main,
             R.id.product3_recommand_image_fragment_main
     };
-
-
+    //显示商品的当前价格
     private TextView[] product_priceCurrentList_textView = new TextView[PRODUCT_RECOMMAND_COUNT];
     private int[] product_priceCurrentList_id = new int[] {
             R.id.product1_priceCurrent_fragment_main,
             R.id.product2_priceCurrent_fragment_main,
             R.id.product3_priceCurrent_fragment_main
     };
-
+    //显示商品的之前价格
     private TextView[] product_priceLastList_textView = new TextView[PRODUCT_RECOMMAND_COUNT];
     private int[] product_priceLastList_id = new int[] {
             R.id.product1_priceLast_fragment_main,
@@ -76,8 +83,12 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
             R.id.product3_priceLast_fragment_main
     };
 
-    //推荐商品的实体列表
-    List<Product> productRecommandList;
+    //热销的商品列表
+    List<Product> productHotList;
+    //显示热销的商品列表的GridLayout
+    GridLayout gridLayout_productHot;
+    //热销商品的图片资源列表
+    List<Bitmap> productHot_bitmap_list = new ArrayList<Bitmap>();
 
     private Handler pic_hdl;
 
@@ -90,16 +101,32 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        initSearchBar(rootView);
+        initPromotion(rootView);
+        //获取推荐商品的图片资源
+        productRecommandList = getProductRecommandList();
+        initProductRecommand(rootView);
+        //获得热销的商品列表
+        productHotList = getProductHotList();
+        pic_hdl = new PicHandler();
+        Thread t = new LoadPicThread();
+        t.start();
         return rootView;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        innilize(getView());
+        initBanner(getView());
     }
 
-    private void innilize(View rootView) {
+    public void initSearchBar(View rootView) {
+        editText_fragment_main = (EditText) rootView.findViewById(R.id.editText_fragment_main);
+        searchButton_fragment_main = (Button) rootView.findViewById(R.id.searchButton_fragment_main);
+        searchButton_fragment_main.setOnClickListener(this);
+    }
+
+    public void initBanner(View rootView) {
         if (rootView != null)
             viewPagerMain = (ViewPager)rootView.findViewById(R.id.viewpager_main);
         else {
@@ -113,42 +140,53 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
             Log.v("viewPager", "viewPagerMain == null");
             return;
         }
+    }
 
-        imageHot = (ImageView) rootView.findViewById(R.id.image_hot);
+    public void initPromotion(View rootView) {
+        imageHot = (ImageView) rootView.findViewById(R.id.imageView_freshShop);
         imageHot.setOnClickListener(this);
-        editText_fragment_main = (EditText) rootView.findViewById(R.id.editText_fragment_main);
-        searchButton_fragment_main = (Button) rootView.findViewById(R.id.searchButton_fragment_main);
-        searchButton_fragment_main.setOnClickListener(this);
+    }
 
-        //获取推荐商品栏的控件
-        product1_recommand = (LinearLayout) rootView.findViewById(R.id.product1_recommand_fragment_main);
-        product2_recommand = (LinearLayout) rootView.findViewById(R.id.product2_recommand_fragment_main);
-        product3_recommand = (LinearLayout) rootView.findViewById(R.id.product3_recommand_fragment_main);
-
+    public void initProductRecommand(View rootView) {
+        /*//获得推荐的商品列表
+        productRecommandList = getProductRecommandList();*/
+        //对推荐商品的栏目进行初始化
         for(int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
+            //初始化推荐商品的ImageView控件
             recommand_product_imageList_imageView[i] = (ImageView) rootView.findViewById(recommand_product_imageList_id[i]);
-        }
-
-        for(int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
+            //初始化显示推荐商品的当前价格的TextView
             product_priceCurrentList_textView[i] = (TextView) rootView.findViewById(product_priceCurrentList_id[i]);
-        }
-
-        for(int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
+            //初始化显示推荐商品之前价格的TextView
             product_priceLastList_textView[i] = (TextView) rootView.findViewById(product_priceLastList_id[i]);
+            //为之前价格的TextView设置中划线
             product_priceLastList_textView[i].getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG );
+            //初始化包含推荐商品所有信息的LinearLayout布局，并为之绑定监听器
+            productLayoutList_recommand[i] = (LinearLayout) rootView.findViewById(productLayoutList_recommand_id[i]);
+            productLayoutList_recommand[i].setOnClickListener(this);
         }
+    }
 
-        //为四个推荐商品设置图像
-//        product1_recommand_image.setImageBitmap();
-        productRecommandList = getProductRecommandList();
-        pic_hdl = new PicHandler();
-        Thread t = new LoadPicThread();
-        t.start();
+    public void initProductHot(View rootView, LayoutInflater inflater) {
 
-        //为每个商品设置点击的监听器
-        product1_recommand.setOnClickListener(this);
-        product2_recommand.setOnClickListener(this);
-        product3_recommand.setOnClickListener(this);
+        //获得展示热销商品信息的GridLayout
+        gridLayout_productHot = (GridLayout) rootView.findViewById(R.id.gridLayout_fragment_main);
+        ProductInfoLinearLayout linearLayout;
+        ImageView productImage;
+        TextView productSaleCount;
+        ViewGroup.LayoutParams imagePara = new ViewGroup.LayoutParams(200, 200);
+        for(int i = 0; i < productHotList.size(); i ++) {
+            productImage = new ImageView(getContext());
+            productImage.setLayoutParams(imagePara);
+            productImage.setImageBitmap(productHot_bitmap_list.get(i));
+            productSaleCount = new TextView(getContext());
+            productSaleCount.setText(productHotList.get(i).getSale_account() + "");
+            linearLayout = (ProductInfoLinearLayout) inflater.inflate(R.layout.item_product_short, null);
+            linearLayout.addView(productImage);
+            linearLayout.addView(productSaleCount);
+            linearLayout.setPosition(i);
+            linearLayout.setOnClickListener(this);
+            gridLayout_productHot.addView(linearLayout);
+        }
     }
 
     @Override
@@ -160,7 +198,7 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
                 intent.setClass(getContext(), WebinfoActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.image_hot:
+            case R.id.imageView_freshShop:
                 intent.setClass(getContext(), WebinfoActivity.class);
                 startActivity(intent);
                 break;
@@ -169,6 +207,24 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
                 intent.setClass(getContext(), SearchActivity.class);
                 startActivity(intent);
                 break;
+        }
+        for (int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
+            if(id == productLayoutList_recommand_id[i]) {
+                intent.setClass(getContext(), ProductDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("product", productRecommandList.get(i));
+                intent.putExtras(bundle);
+                startActivity(intent);
+                return;
+            }
+        }
+        if(v.getClass().equals(ProductInfoLinearLayout.class)) {
+            intent.setClass(getContext(), ProductDetailsActivity.class);
+            int position = ((ProductInfoLinearLayout)v).getPosition();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("product", productHotList.get(position));
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     }
 
@@ -216,10 +272,14 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
         public void run(){
             List<Bitmap> imgList = new ArrayList<Bitmap>();
             Bitmap img;
-            productRecommandList = getProductRecommandList();
             for (int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
                 img = getUrlImage("http://www.lazysong.cn" + productRecommandList.get(i).getProduct_imgs());
                 imgList.add(img);
+            }
+            //获取热销商品的图片资源
+            for(int i = 0; i < productHotList.size(); i ++) {
+                img = getUrlImage("http://www.lazysong.cn" + productHotList.get(i).getProduct_imgs());
+                productHot_bitmap_list.add(img);
             }
             Message msg = pic_hdl.obtainMessage();
             msg.what = 0;
@@ -232,15 +292,14 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
 
         @Override
         public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-            //String s = (String)msg.obj;
-            //ptv.setText(s);
+            // 为推荐商品设置图片资源以及文本
             List<Bitmap> imgList = (ArrayList<Bitmap>)msg.obj;
             for(int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
                 recommand_product_imageList_imageView[i].setImageBitmap(imgList.get(i));
                 product_priceCurrentList_textView[i].setText(productRecommandList.get(i).getCurrent_price() + "");
                 product_priceLastList_textView[i].setText(productRecommandList.get(i).getLast_price() + "");
             }
+            initProductHot(getView(), getLayoutInflater(null));
         }
 
     }
@@ -299,5 +358,20 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
             productRecommandList.add(product);
         }
         return productRecommandList;
+    }
+
+    List<Product> getProductHotList() {
+        List<Product> productHotList = new ArrayList<Product>();
+        Product product;
+        for(int i = 0; i < 4; i ++) {
+            product = new Product(i);
+            product.setProduct_name("name" + i);
+            product.setCurrent_price(10*i +10);
+            product.setLast_price(10*i +20);
+            product.setProduct_imgs("/images/" + (i+1) + ".jpg");
+            product.setSale_account((i + 1) * 1000);
+            productHotList.add(product);
+        }
+        return productHotList;
     }
 }
