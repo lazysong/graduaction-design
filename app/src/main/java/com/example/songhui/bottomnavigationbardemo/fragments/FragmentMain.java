@@ -3,6 +3,7 @@ package com.example.songhui.bottomnavigationbardemo.fragments;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -50,12 +51,30 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     private LinearLayout product1_recommand;
     private LinearLayout product2_recommand;
     private LinearLayout product3_recommand;
-    private LinearLayout product4_recommand;
 
-    private ImageView product1_recommand_image;
-    private ImageView product2_recommand_image;
-    private ImageView product3_recommand_image;
-    private ImageView product4_recommand_image;
+    private static final int PRODUCT_RECOMMAND_COUNT = 3;
+
+    private ImageView[] recommand_product_imageList_imageView = new ImageView[PRODUCT_RECOMMAND_COUNT];
+    private int[] recommand_product_imageList_id = new int[] {
+            R.id.product1_recommand_image_fragment_main,
+            R.id.product2_recommand_image_fragment_main,
+            R.id.product3_recommand_image_fragment_main
+    };
+
+
+    private TextView[] product_priceCurrentList_textView = new TextView[PRODUCT_RECOMMAND_COUNT];
+    private int[] product_priceCurrentList_id = new int[] {
+            R.id.product1_priceCurrent_fragment_main,
+            R.id.product2_priceCurrent_fragment_main,
+            R.id.product3_priceCurrent_fragment_main
+    };
+
+    private TextView[] product_priceLastList_textView = new TextView[PRODUCT_RECOMMAND_COUNT];
+    private int[] product_priceLastList_id = new int[] {
+            R.id.product1_priceLast_fragment_main,
+            R.id.product2_priceLast_fragment_main,
+            R.id.product3_priceLast_fragment_main
+    };
 
     //推荐商品的实体列表
     List<Product> productRecommandList;
@@ -105,11 +124,19 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
         product1_recommand = (LinearLayout) rootView.findViewById(R.id.product1_recommand_fragment_main);
         product2_recommand = (LinearLayout) rootView.findViewById(R.id.product2_recommand_fragment_main);
         product3_recommand = (LinearLayout) rootView.findViewById(R.id.product3_recommand_fragment_main);
-        product4_recommand = (LinearLayout) rootView.findViewById(R.id.product4_recommand_fragment_main);
-        product1_recommand_image = (ImageView) rootView.findViewById(R.id.product1_recommand_image_fragment_main);
-        product2_recommand_image = (ImageView) rootView.findViewById(R.id.product2_recommand_image_fragment_main);
-        product3_recommand_image = (ImageView) rootView.findViewById(R.id.product3_recommand_image_fragment_main);
-        product4_recommand_image = (ImageView) rootView.findViewById(R.id.product4_recommand_image_fragment_main);
+
+        for(int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
+            recommand_product_imageList_imageView[i] = (ImageView) rootView.findViewById(recommand_product_imageList_id[i]);
+        }
+
+        for(int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
+            product_priceCurrentList_textView[i] = (TextView) rootView.findViewById(product_priceCurrentList_id[i]);
+        }
+
+        for(int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
+            product_priceLastList_textView[i] = (TextView) rootView.findViewById(product_priceLastList_id[i]);
+            product_priceLastList_textView[i].getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG );
+        }
 
         //为四个推荐商品设置图像
 //        product1_recommand_image.setImageBitmap();
@@ -118,12 +145,10 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
         Thread t = new LoadPicThread();
         t.start();
 
-
-
+        //为每个商品设置点击的监听器
         product1_recommand.setOnClickListener(this);
         product2_recommand.setOnClickListener(this);
         product3_recommand.setOnClickListener(this);
-        product4_recommand.setOnClickListener(this);
     }
 
     @Override
@@ -189,10 +214,16 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     class LoadPicThread extends Thread{
         @Override
         public void run(){
-            Bitmap img = getUrlImage("http://www.lazysong.cn" + "/images/1.jpg");
+            List<Bitmap> imgList = new ArrayList<Bitmap>();
+            Bitmap img;
+            productRecommandList = getProductRecommandList();
+            for (int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
+                img = getUrlImage("http://www.lazysong.cn" + productRecommandList.get(i).getProduct_imgs());
+                imgList.add(img);
+            }
             Message msg = pic_hdl.obtainMessage();
             msg.what = 0;
-            msg.obj = img;
+            msg.obj = imgList;
             pic_hdl.sendMessage(msg);
         }
     }
@@ -204,8 +235,12 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
             // TODO Auto-generated method stub
             //String s = (String)msg.obj;
             //ptv.setText(s);
-            Bitmap myimg = (Bitmap)msg.obj;
-            product1_recommand_image.setImageBitmap(myimg);
+            List<Bitmap> imgList = (ArrayList<Bitmap>)msg.obj;
+            for(int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
+                recommand_product_imageList_imageView[i].setImageBitmap(imgList.get(i));
+                product_priceCurrentList_textView[i].setText(productRecommandList.get(i).getCurrent_price() + "");
+                product_priceLastList_textView[i].setText(productRecommandList.get(i).getLast_price() + "");
+            }
         }
 
     }
@@ -259,6 +294,7 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
             product = new Product(i);
             product.setProduct_name("name" + i);
             product.setCurrent_price(10*i +10);
+            product.setLast_price(10*i +20);
             product.setProduct_imgs("/images/" + (i+1) + ".jpg");
             productRecommandList.add(product);
         }
