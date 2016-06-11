@@ -50,6 +50,10 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     private ImageView imageHot;
     private EditText editText_fragment_main;
 
+    private boolean isRunning =false;
+    private View rootView;
+    private LayoutInflater inflater;
+//    private Thread t = new LoadPicThread();
     //展示的推荐商品的个数
     private static final int PRODUCT_RECOMMAND_COUNT = 3;
     //推荐商品的实体列表
@@ -93,14 +97,10 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     private Handler pic_hdl;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        this.inflater = inflater;
         initSearchBar(rootView);
         initPromotion(rootView);
         //获取推荐商品的图片资源
@@ -109,6 +109,8 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
         //获得热销的商品列表
         productHotList = getProductHotList();
         pic_hdl = new PicHandler();
+        isRunning = true;
+        Log.v("mythread", "method onCreateView() is called, isRunning == true");
         Thread t = new LoadPicThread();
         t.start();
         return rootView;
@@ -170,6 +172,7 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
 
         //获得展示热销商品信息的GridLayout
         gridLayout_productHot = (GridLayout) rootView.findViewById(R.id.gridLayout_fragment_main);
+        gridLayout_productHot.removeAllViews();
         ProductInfoLinearLayout linearLayout;
         ImageView productImage;
         TextView productSaleCount;
@@ -270,21 +273,25 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     class LoadPicThread extends Thread{
         @Override
         public void run(){
-            List<Bitmap> imgList = new ArrayList<Bitmap>();
-            Bitmap img;
-            for (int i = 0; i < PRODUCT_RECOMMAND_COUNT; i ++) {
-                img = getUrlImage("http://www.lazysong.cn" + productRecommandList.get(i).getProduct_imgs());
-                imgList.add(img);
+            while(isRunning) {
+                isRunning = false;
+                List<Bitmap> imgList = new ArrayList<Bitmap>();
+                Bitmap img;
+                for (int i = 0; i < PRODUCT_RECOMMAND_COUNT; i++) {
+                    img = getUrlImage("http://www.lazysong.cn" + productRecommandList.get(i).getProduct_imgs());
+                    imgList.add(img);
+                }
+                //获取热销商品的图片资源
+                for (int i = 0; i < productHotList.size(); i++) {
+                    img = getUrlImage("http://www.lazysong.cn" + productHotList.get(i).getProduct_imgs());
+                    productHot_bitmap_list.add(img);
+                }
+                Message msg = pic_hdl.obtainMessage();
+                msg.what = 0;
+                msg.obj = imgList;
+                pic_hdl.sendMessage(msg);
+                Log.v("mythread", "method run() is called, isRunning is false");
             }
-            //获取热销商品的图片资源
-            for(int i = 0; i < productHotList.size(); i ++) {
-                img = getUrlImage("http://www.lazysong.cn" + productHotList.get(i).getProduct_imgs());
-                productHot_bitmap_list.add(img);
-            }
-            Message msg = pic_hdl.obtainMessage();
-            msg.what = 0;
-            msg.obj = imgList;
-            pic_hdl.sendMessage(msg);
         }
     }
 
@@ -299,7 +306,9 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
                 product_priceCurrentList_textView[i].setText(productRecommandList.get(i).getCurrent_price() + "");
                 product_priceLastList_textView[i].setText(productRecommandList.get(i).getLast_price() + "");
             }
-            initProductHot(getView(), getLayoutInflater(null));
+//            initProductHot(rootView, getLayoutInflater(null));
+            initProductHot(rootView, inflater);
+
         }
 
     }
@@ -363,7 +372,7 @@ public class FragmentMain extends Fragment implements View.OnClickListener {
     List<Product> getProductHotList() {
         List<Product> productHotList = new ArrayList<Product>();
         Product product;
-        for(int i = 0; i < 4; i ++) {
+        for(int i = 4; i < 10; i ++) {
             product = new Product(i);
             product.setProduct_name("name" + i);
             product.setCurrent_price(10*i +10);

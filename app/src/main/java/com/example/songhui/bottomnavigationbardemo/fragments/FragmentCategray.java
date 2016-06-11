@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.songhui.bottomnavigationbardemo.activities.ProductListActivity;
@@ -88,13 +89,16 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
 //        subCategoryLayout.setRowCount(3);
 
         List<View> viewList = new ArrayList<View>();
-        LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(300, 300);
+        LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(200, 200);
         MyLinearLayout myLinearLayout;
         subCategories = getSubCategories(    topCategories.get( (   (MyTextView)v).getNumber()  )      );
 
         scrollViewRight.removeAllViewsInLayout();
+        TextView textView;
         for (int i = 0; i < subCategories.size(); i ++) {
             myLinearLayout = (MyLinearLayout) inflater.inflate(R.layout.sub_category_linear_layout, null);
+            textView = (TextView) myLinearLayout.findViewById(R.id.subcategrayName_subcategory_linear_layout);
+            textView.setText(subCategories.get(i).getProduct_subcategory_name());
             myLinearLayout.setLayoutParams(linearLayoutParams);
 //            myLinearLayout.setText(subCategories.get(i).getProduct_subcategory_name());
             myLinearLayout.setProduct_subcategory_no(subCategories.get(i).getProduct_subcategory_no());
@@ -109,8 +113,9 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
         TopCategory topCategory;
         //获得一级种类的Json数据
         //将Json数据转换为ArrayList<TopCategory>
-        for(int i = 0; i < 5; i ++) {
-            topCategory = new TopCategory(i,"水果蔬菜");
+        String[] categryName = new String[]{"水果", "蔬菜", "禽畜", "水产", "食用油", "谷类", "调味品", "酒茶冲饮", "肉类水产加工", "蔬果加工", "肉蛋类", "零食特产"};
+        for(int i = 0; i < categryName.length; i ++) {
+            topCategory = new TopCategory(i,categryName[i]);
             topCategories.add(topCategory);
         }
         return topCategories;
@@ -121,8 +126,22 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
         SubCategory subCategory;
         //获取二级种类的Json数据
         //将Json数据转换为ArrayList<SunCategory>
-        for(int i = 0; i < 9; i ++) {
-            subCategory = new SubCategory(i, "苹果", topCategory, "/image");
+        String[][] subCategryNames = {
+                {"苹果", "梨子", "香蕉", "菠萝", "西瓜", "葡萄", "提子"},
+                {"大白菜", "小白菜", "生菜", "包菜", "韭菜", "香菜", "西蓝花", "胡萝卜", "南瓜", "丝瓜", "冬瓜", "黄瓜", "苦瓜", "辣椒", "西红柿", "秋葵", "莲藕", "红薯", "紫薯", "土豆", "芋头", "淮山", "葛根", "魔芋", "香菇", "黑木耳", "杏鲍菇", "茶树菇", "竹荪", "蘑菇", "姜", "大蒜球", "大葱", "小葱"},
+                {"鸡", "鸭", "鹅", "鸽子", "牛", "羊", "猪", "马", "驴", "骡", "兔"},
+                {"鲈鱼", "鲤鱼", "泥鳅", "草鱼", "黄鳝", "青鱼", "鲫鱼", "雄鱼", "鲢鱼"},
+                {"大豆油", "山茶油", "花生油", "橄榄油", "玉米油", "菜籽油", "葵花籽油", "色拉油"},
+                {"红豆", "大豆", "绿豆", "芸豆", "蚕豆", "黑豆", "赤小豆", "水稻", "大米", "小米", "玉米", "大麦"},
+                {"盐", "味精", "鸡精", "糖", "醋", "酱油", "芝麻油", "蚝油干", "辣椒", "辣椒粉", "胡椒粉", "孜然粉"},
+                {"绿茶", "普洱", "乌龙茶", "毛尖", "黑茶", "蓝茶", "红茶", "保健茶", "黄茶", "白茶", "酒花茶"},
+                {"香肠", "火腿", "腊制品", "丸子制品", "腊肉"},
+                {"干香菇", "干菌子", "百合干", "脱水蔬菜", "干笋", "葡萄干", "地瓜干", "黑加仑果", "干桂圆", "干柿饼", "干木耳"},
+                {"鸡蛋", "鸭蛋", "鹌鹑蛋", "鹅蛋", "鸽子蛋", "皮蛋", "咸鸭蛋"},
+                {"蜂蜜", "红枣", "枸杞", "莲子饼干", "糕点", "麻辣食品", "核桃", "坚果", "干果", "瓜子"}
+        };
+        for(int i = 0; i < subCategryNames[topCategory.getProduct_category_no()].length; i ++) {
+            subCategory = new SubCategory(i, subCategryNames[topCategory.getProduct_category_no()][i], topCategory, "/image");
             subCategories.add(subCategory);
         }
         return subCategories;
@@ -136,6 +155,7 @@ public class FragmentCategray extends Fragment implements View.OnClickListener {
                     "自定义的TextView被点击了！top_category_no = " + ((MyTextView)v).getNumber(),
                     Toast.LENGTH_SHORT).show();
             initRight(getView(), getLayoutInflater(null), v);
+//            v.setBackgroundResource(R.color.colorPrimary);
         }
         if(v.getClass().equals(MyLinearLayout.class)) {
             int product_subcategory_no = ((MyLinearLayout)v).getProduct_subcategory_no();

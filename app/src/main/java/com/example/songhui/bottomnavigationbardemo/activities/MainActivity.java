@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
+                Log.v("mythread", "method onPageSelected() is called, position == "  + position);
                 bottomNavigationBar.selectTab(position);
             }
         });
@@ -86,12 +88,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
         public Fragment getItem(int i) {
             switch (i) {
                 case 0:
+                    Log.v("mythread", "new FragmentMain()");
                     return new FragmentMain();
                 case 1:
+                    Log.v("mythread", "new FragmentCategray()");
                     return new FragmentCategray();
                 case 2:
+                    Log.v("mythread", "new FragmentCar()");
                     return new FragmentCar();
                 case 3:
+                    Log.v("mythread", "new FregmentAccount()");
                     return new FregmentAccount();
 
                 default:

@@ -43,7 +43,8 @@
         <ScrollView
             android:id="@+id/scrollview_sub_category"
             android:layout_width="match_parent"
-            android:layout_height="512dp">
+            android:layout_height="512dp"
+            android:paddingTop="30dp">
 
         </ScrollView>
     </LinearLayout>
